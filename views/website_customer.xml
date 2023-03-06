@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="website_customer" name="Rent customer">
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty">
+                    <section class="vh-100 gradient-custom" data-vcss="001" data-snippet="s_website_form">
+                        <div class="container py-5 h-100">
+                            <form action="/customer/create/submit" method="post" enctype="multipart/form-data" class="o_mark_required" data-mark="*" data-success-mode='redirect' data-success-page="/request2">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                           <div class="card bg-dark text-white" align="center" style="border-radius: 1rem;">
+                             <div class="card-body p-5 text-center" >
+                               <h1 class="fw-bold mb-2 text-uppercase">CREATE CUSTOMER</h1>
+                                 <br/>
+                               <div class="row d-flex justify-content-center align-items-center h-100 s_website_form_required" data-type="char" data-name="Field">
+                                       <div class="col-sm">
+                                       <input id="name" type="text" style="border-radius: 1rem;" placeholder="Name" class="form-outline form-white mb-4 s_website_form_input" name="name" required="1"/>
+                                       </div>
+                               </div>
+                                <div class="row d-flex justify-content-center align-items-center h-100 s_website_form_required" data-type="char" data-name="Field">
+                                       <div class="col-sm">
+                                       <input id="phone" type="text" placeholder="Phone" style="border-radius: 1rem;" class="form-outline form-white mb-4 s_website_form_input" name="phone" required="1"/>
+                                       </div>
+                               </div>
+                               <div class="row d-flex justify-content-center align-items-center h-100 s_website_form_required" data-type="char" data-name="Field">
+                                       <div class="col-sm">
+                                       <input id="email" type="email" placeholder="Email" style="border-radius: 1rem;" class="form-outline form-white mb-4 s_website_form_input" name="email" required="1"/>
+                                       </div>
+                               </div>
+                               <div class="form-group col-12 s_website_form_submit" data-name="Submit Button">
+                                   <div style="width: 200px;" class="s_website_form_label"/>
+                                   <button type="submit" class="btn btn-primary">Submit</button>
+                               </div>
+                             </div>
+                           </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

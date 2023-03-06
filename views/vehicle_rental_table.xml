@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo><data>
+ <record id="vehicle_table_action" model="ir.actions.act_window">
+    <field name="name">Rent Vehicles</field>
+    <field name="res_model">vehicle.table</field>
+    <field name="view_mode">tree,form,kanban</field>
+    <field name="context">{"search_default_state":1}</field>
+ </record>
+ <record id="vehicle_table_view_tree" model="ir.ui.view">
+    <field name="name">vehicle.table.tree</field>
+    <field name="model">vehicle.table</field>
+    <field name="arch" type="xml">
+        <tree string="Rental" decoration-warning="date_warning" decoration-danger="date_late" >
+            <field name="name" />
+            <field name="rental_vehicle_id" />
+            <field name="vehicle_brand" />
+            <field name="reg_date" readonly="False"/>
+            <field name="model_year" optional="hide"/>
+            <field name="currency_id" invisible="1"/>
+            <field name="date_warning" optional="hide"/>
+            <field name="date_late" optional="hide"/>
+            <field name="rent_amount" widget='monetary' optional="hide"/>
+        </tree>
+    </field>
+ </record>
+
+ <record id="vehicle_table_view_form" model="ir.ui.view">
+     <field name="name">vehicle.table.form</field>
+     <field name="model">vehicle.table</field>
+     <field name="arch" type="xml">
+         <form string="Rental Form">
+             <header>
+                 <field name="state"  widget="statusbar" options="{'clickable': '1'}"/>
+             </header>
+             <sheet>
+                 <div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object" name="vehicle_request"
+                        icon="fa-car">
+                        <field string="new" name="rental_vehicle_id" widget="statinfo"/>
+                    </button>
+                 </div>
+                 <group>
+                     <group>
+                     <field name="rental_vehicle_id"/>
+                     <field name="reg_date" readonly="False"/>
+                     <field name="currency_id" invisible="1"/>
+                     <field name="rent_amount" widget='monetary'/>
+                     </group>
+                     <group>
+                         <group>
+                          <field name="date_warning"/>
+                         </group>
+                         <group>
+                           <field name="date_late"/>
+                         </group>
+                     <group>
+                     <field name="name" />
+                     <field name="model_year" readonly="False"/>
+                     <field name="vehicle_brand"/>
+                     <field name="vehicle_image"/>
+                     </group>
+                     </group>
+                 </group>
+                 <notebook>
+                     <page string="Rent Requests">
+                         <group>
+                            <field name="confirmed_rental_ids"/>
+                         </group>
+                     </page>
+                     <page string="Rent Charges">
+                         <group>
+                            <field name="rental_charge_ids" string=" " />
+                         </group>
+                     </page>
+                 </notebook>
+             </sheet>
+             <div class="oe_chatter">
+                 <field name="message_follower_ids"/>
+                 <field name="activity_ids"/>
+                 <field name="message_ids"/>
+             </div>
+         </form>
+     </field>
+ </record>
+
+    <record id="view_vehicle_table_search" model="ir.ui.view">
+            <field name="name">vehicle.table_search</field>
+            <field name="model">vehicle.table</field>
+            <field name="arch" type="xml">
+                <search string="rental_vehicle_id">
+                    <field name="name" />
+                    <field name="vehicle_brand"/>
+                    <filter string="Available" name="state" domain="[('state', '=', 'Available')]"/>
+                    <filter string="Not Available" name="state2" domain="[('state', '=', 'Not Available')]"/>
+                    <group expand="1" string="Group By">
+                        <filter string="vehicle_brand" name="vehicle_brand" context="{'group_by':'vehicle_brand', 'residual_visible':True}"/>
+                        <filter string="model_year" name="model_year" context="{'group_by':'model_year', 'residual_visible':True}"/></group>
+                </search>
+            </field>
+        </record>
+
+
+<!--    kanban view    -->
+
+    <record id="vehicle_table_view_kanban" model="ir.ui.view">
+     <field name="name">vehicle.table.kanban</field>
+     <field name="model">vehicle.table</field>
+     <field name="arch" type="xml">
+         <kanban class="rental_Form_kanban">
+                     <field name="rental_vehicle_id"/>
+                     <field name="name"/>
+                     <field name="model_year"/>
+                     <field name="vehicle_brand"/>
+                     <field name="currency_id" invisible="1"/>
+                     <field name="rent_amount" widget='monetary'/>
+                     <field name="reg_date" readonly="False"/>
+                     <field name="state"/>
+                     <templates>
+                        <t t-name="kanban-box">
+                                  <div t-attf-class="oe_kanban_global_click">
+                                    <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                    <field name="rental_vehicle_id"/>
+                                    </strong>
+                                    </div>
+                                     <div t-if="record.model_year.value">
+                                        <t t-esc="record.model_year.value"/>
+                                     </div>
+                                      <div t-if="record.vehicle_brand.value">
+                                        <t t-esc="record.vehicle_brand.value"/>
+                                     </div>
+                                      <div t-if="record.state.value">
+                                        <t t-esc="record.state.value"/>
+                                     </div>
+                                    </div>
+                        </t>
+                     </templates>
+         </kanban>
+     </field>
+ </record>
+
+<!--tree view inside form -->
+
+<record id="rent_charges_view_tree" model="ir.ui.view">
+    <field name="name">rent.charges.tree</field>
+    <field name="model">rent.charges</field>
+    <field name="arch" type="xml">
+        <tree string="rent charges Tree" editable="bottom">
+              <field name="rental_time"/>
+               <field name="currency_id" invisible="1"/>
+              <field name="rental_charge_amount" widget='monetary'/>
+            </tree>
+    </field>
+</record>
+
+<record id="rent_charges_view_form" model="ir.ui.view">
+    <field name="name">rent.charges.form</field>
+    <field name="model">rent.charges</field>
+    <field name="arch" type="xml">
+        <form string="rent charges form">
+            <group>
+               <field name="rental_time"/>
+               <field name="currency_id" invisible="1"/>
+               <field name="rental_charge_amount" widget='monetary'/>
+            </group>
+            </form>
+    </field>
+</record>
+</data> </odoo>

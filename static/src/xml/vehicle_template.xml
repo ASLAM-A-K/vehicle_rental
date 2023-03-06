@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="vehicle_rental.vehicle_template">
+            <div class="o_web_sign_name_and_signature"/>
+            <div class="o_portal_sign_controls my-3">
+                <div class="text-end my-3">
+                     <div class="container">
+                         <div class="row align-items-center">
+                            <t t-foreach="vehicle_id" t-as="vehicle">
+                                <div class="card" style="width: 18rem;">
+                                    <form action="/top_vehicle_details" method="post" enctype="multipart/form-data" class="o_mark_required">
+                                    <div>
+                                    <img class="card-img-top" t-attf-src="/web/image/vehicle.table/{{ vehicle_id[vehicle] }}/vehicle_image" alt="Card image cap"/>
+                                    <div  class="card-body" align="center">
+                                        <h5 class="card-title"><span t-esc="vehicle_index + 1"/>:
+                                            <input type="hidden" name="vehicle_id" t-att-value="vehicle_id[vehicle]"/>
+                                            <span t-esc="vehicle"/></h5>
+                                        <button type="submit" style="background-color: #bf2828;" class="btn btn-outline-light btn-lg px-5">Details</button>
+                                    </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </t>
+                         </div>
+                     </div>
+                </div>
+            </div>
+    </t>
+</templates>
+

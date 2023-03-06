@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+<template id="website_rent_success" name="Rent Success">
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty">
+                    <section class="vh-100 gradient-custom" data-vcss="001" data-snippet="s_website_form">
+                        <div class="container py-5 h-100">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="card bg-dark text-white" align="center" style="border-radius: 1rem;">
+                             <div class="card-body p-5 text-center" >
+                                <h5 class="fw-bold mb-2 text-uppercase">Rent Request Created Succesfully!!!</h5>
+                                <a t-attf-href="/request2" name="back"> Back to Request</a>
+                             </div>
+                           </div>
+                        </div>
+                    </section>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

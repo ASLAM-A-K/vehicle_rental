@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="rental_pdf_view_form" model="ir.ui.view">
+    <field name="name">rental.pdf.wizard.form</field>
+    <field name="model">rental.pdf</field>
+    <field name="arch" type="xml">
+    <form string="rental wizard">
+    <group class="oe_title">
+        <field name="date_from"/>
+        <field name="date_to"/>
+        <field name="vehicle_name_id"/>
+        <field name="partner_id"/>
+    </group>
+     <footer>
+       <button string="PDF" name="generate_pdf" type="object" class="oe_highlight" data-hotkey="q"/>
+       <button string="XLS" name="generate_xls" type="object" class="oe_highlight" data-hotkey="q"/>
+       <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+     </footer>
+     </form>
+     </field>
+  </record>
+
+  <record id="rental_pdf_wizard_action" model="ir.actions.act_window">
+    <field name="name">Vehicle Rental Report</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">rental.pdf</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="rental_pdf_view_form"/>
+    <field name="target">new</field>
+  </record>
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <template id="basic_snippet" name="Top 4 Vehicles">
+           <section class="container dynamic_snippet_vehicle">
+               <div class="qweb_vehicle">
+
+               </div>
+            </section>
+        </template>
+    </data>
+</odoo>

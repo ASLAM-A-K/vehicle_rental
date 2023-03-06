@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="website_vehicle" name="vehicle_details">
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty">
+                    <section class="vh-100 gradient-custom" data-vcss="001" data-snippet="s_website_form">
+                        <div class="container py-5 h-100">
+                            <div class="card bg-dark text-white" align="center" style="border-radius: 1rem;">
+                             <div class="card-body p-5 text-center" >
+                                <h1 class="fw-bold mb-2 text-uppercase text-decoration-underline">VEHICLE DETAILS</h1>
+                               <div class="row d-flex justify-content-center align-items-center h-100 s_website_form_required" data-type="char" data-name="Field">
+                                   <div class="form-outline mb-4">
+                                       <div class="form-outline form-white mb-4 available_vehicle">
+                                               <t t-foreach="vehicle or []" t-as="vehicle">
+                                                       <img class="card-img-top" t-attf-src="/web/image/vehicle.table/{{ vehicle.id }}/vehicle_image" alt="Card image cap"
+                                                       style="width:450px; height:100%"/>
+                                                   <br/><br/>
+                                                   <div>
+                                                   <h5>Name:</h5> <h3><t t-esc="vehicle.name" /><br/></h3>
+                                                   <h5>Model Year:</h5> <h3><t t-esc="vehicle.model_year"/><br/></h3>
+                                                   <h5>State:</h5> <h3><t t-esc="vehicle.state"/><br/></h3>
+                                                   <h5>Vehicle Brand:</h5> <h3><t t-esc="vehicle.vehicle_brand"/><br/></h3>
+                                                   <h5>Registration Date:</h5> <h3><t t-esc="vehicle.reg_date"/></h3>
+                                                   </div>
+                                               </t>
+                                       </div>
+                                   </div>
+                               </div>
+                                   <a t-attf-href="/" name="create"> Back to Homepage</a>
+                             </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
